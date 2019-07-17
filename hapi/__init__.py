@@ -1,5 +1,6 @@
 import ctypes
 
+from .version import *
 from .common import *
 from .helpers import *
 
