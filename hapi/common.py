@@ -82,7 +82,7 @@ License = c_int
     LICENSE_HOUDINI_ENGINE_INDIE,
     LICENSE_HOUDINI_INDIE,
     LICENSE_MAX
-) = xrange(7)
+) = range(7)
 
 StatusType = c_int
 (
@@ -90,7 +90,7 @@ StatusType = c_int
     STATUS_COOK_RESULT,
     STATUS_COOK_STATE,
     STATUS_MAX
-) = xrange(4)
+) = range(4)
 
 StatusVerbosity = c_int
 STATUSVERBOSITY_0 = 0
@@ -145,7 +145,7 @@ SessionType = c_int
     SESSION_CUSTOM2,
     SESSION_CUSTOM3,
     SESSION_MAX
-) = xrange(6)
+) = range(6)
 
 State = c_int
 (
@@ -157,7 +157,7 @@ State = c_int
     STATE_STARTING_LOAD,
     STATE_LOADING,
     STATE_MAX,
-) = xrange(8)
+) = range(8)
 STATE_MAX_READY_STATE = STATE_READY_WITH_COOK_ERRORS
 
 PackedPrimInstancingMode = c_int
@@ -167,7 +167,7 @@ PackedPrimInstancingMode = c_int
     PACKEDPRIM_INSTANCING_MODE_HIERARCHY,
     PACKEDPRIM_INSTANCING_MODE_FLAT,
     PACKEDPRIM_INSTANCING_MODE_MAX
-) = xrange(-1,4)
+) = range(-1,4)
 
 Permissions = c_int
 (
@@ -176,7 +176,7 @@ Permissions = c_int
     PERMISSIONS_READ_ONLY,
     PERMISSIONS_WRITE_ONLY,
     PERMISSIONS_MAX
-) = xrange(5)
+) = range(5)
 
 RampType = c_int
 (
@@ -184,7 +184,7 @@ RampType = c_int
     RAMPTYPE_FLOAT,
     RAMPTYPE_COLOR,
     RAMPTYPE_MAX,
-) = xrange(-1, 3)
+) = range(-1, 3)
 
 ParmType = c_int
 (
@@ -211,7 +211,7 @@ ParmType = c_int
     PARMTYPE_SEPARATOR,
 
     PARMTYPE_MAX
-) = xrange(17)
+) = range(17)
 
 PARMTYPE_INT_START         = PARMTYPE_INT
 PARMTYPE_INT_END           = PARMTYPE_BUTTON
@@ -241,7 +241,7 @@ ChoiceListType = c_int
     CHOICELISTTYPE_MINI,
     CHOICELISTTYPE_REPLACE,
     CHOICELISTTYPE_TOGGLE
-) = xrange(5)
+) = range(5)
 
 PresetType = c_int
 (
@@ -249,7 +249,7 @@ PresetType = c_int
     PRESETTYPE_BINARY,
     PRESETTYPE_IDX,
     PRESETTYPE_MAX
-) = xrange(-1, 3)
+) = range(-1, 3)
 
 NodeType = c_int
 NODETYPE_ANY       = -1
@@ -290,7 +290,7 @@ GroupType = c_int
     GROUPTYPE_POINT,
     GROUPTYPE_PRIM,
     GROUPTYPE_MAX
-) = xrange(-1, 3)
+) = range(-1, 3)
 
 AttributeOwner = c_int
 (
@@ -300,7 +300,7 @@ AttributeOwner = c_int
     ATTROWNER_PRIM,
     ATTROWNER_DETAIL,
     ATTROWNER_MAX
-) = xrange(-1, 5)
+) = range(-1, 5)
 
 CurveType = c_int
 (
@@ -309,7 +309,7 @@ CurveType = c_int
     CURVETYPE_NURBS,
     CURVETYPE_BEZIER,
     CURVETYPE_MAX
-) = xrange(-1, 4)
+) = range(-1, 4)
 
 VolumeType = c_int
 (
@@ -317,7 +317,7 @@ VolumeType = c_int
     VOLUMETYPE_HOUDINI,
     VOLUMETYPE_VDB,
     VOLUMETYPE_MAX
-) = xrange(-1, 3)
+) = range(-1, 3)
 
 StorageType = c_int
 (
@@ -328,7 +328,7 @@ StorageType = c_int
     STORAGETYPE_FLOAT64,
     STORAGETYPE_STRING,
     STORAGETYPE_MAX
-) = xrange(-1, 6)
+) = range(-1, 6)
 
 GeoType = c_int
 (
@@ -338,7 +338,7 @@ GeoType = c_int
     GEOTYPE_INPUT,
     GEOTYPE_CURVE,
     GEOTYPE_MAX
-) = xrange(-1, 5)
+) = range(-1, 5)
 
 PartType = c_int
 (
@@ -350,7 +350,7 @@ PartType = c_int
     PARTTYPE_BOX,
     PARTTYPE_SPHERE,
     PARTTYPE_MAX
-) = xrange(-1, 7)
+) = range(-1, 7)
 
 InputType = c_int
 (
@@ -358,7 +358,7 @@ InputType = c_int
     INPUT_TRANSFORM,
     INPUT_GEOMETRY,
     INPUT_MAX
-) = xrange(-1, 3)
+) = range(-1, 3)
 
 CurveOrders = c_int
 CURVE_ORDER_VARYING =   0
@@ -382,7 +382,7 @@ TransformComponent = c_int
     TRANSFORM_SX,
     TRANSFORM_SY,
     TRANSFORM_SZ
-) = xrange(13)
+) = range(13)
 
 RSTOrder = c_int
 (
@@ -392,7 +392,7 @@ RSTOrder = c_int
     RST,
     STR,
     SRT
-) = xrange(6)
+) = range(6)
 RSTORDER_DEFAULT = SRT
 
 XYZOrder = c_int
@@ -403,7 +403,7 @@ XYZOrder = c_int
     YZX,
     ZXY,
     ZYX
-) = xrange(6)
+) = range(6)
 XYZORDER_DEFAULT = XYZ
 
 ImageDataFormat = c_int
@@ -415,7 +415,7 @@ ImageDataFormat = c_int
     IMAGE_DATA_FLOAT16,
     IMAGE_DATA_FLOAT32,
     IMAGE_DATA_MAX,
-) = xrange(-1,6)
+) = range(-1,6)
 IMAGE_DATA_DEFAULT = IMAGE_DATA_INT8
 
 ImagePacking = c_int
@@ -428,7 +428,7 @@ ImagePacking = c_int
     IMAGE_PACKING_RGBA,
     IMAGE_PACKING_ABGR,
     IMAGE_PACKING_MAX
-) = xrange(-1, 7)
+) = range(-1, 7)
 IMAGE_PACKING_DEFAULT3 = IMAGE_PACKING_RGB
 IMAGE_PACKING_DEFAULT4 = IMAGE_PACKING_RGBA
 
@@ -465,7 +465,7 @@ CacheProperty = c_int
     CACHEPROP_HAS_MAX,
     CACHEPROP_MAX,
     CACHEPROP_CULL_LEVEL,
-) = xrange(6)
+) = range(6)
 
 # Main API Structs
 

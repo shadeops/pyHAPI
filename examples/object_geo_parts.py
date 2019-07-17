@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import sys
 from ctypes import byref, c_int, c_float, create_string_buffer
 
@@ -72,12 +74,12 @@ def process_float_attrib(session, asset_info, geo_node, part_id, owner, name):
                                               attrib_info.count))
     for elm_idx in range(attrib_info.count):
         for tuple_idx in range(attrib_info.tupleSize):
-            print attrib_data[elm_idx * attrib_info.tupleSize + tuple_idx],
-        print
+            print(attrib_data[elm_idx * attrib_info.tupleSize + tuple_idx], end='')
+        print()
     return
 
 def process_geo_parts(session, asset_info, object_node, geo_node, part_id):
-    print 'Object %s, Geo %s, Part %s' % (object_node, geo_node, part_id)
+    print('Object %s, Geo %s, Part %s' % (object_node, geo_node, part_id))
 
     part_info = hapi.PartInfo()
     ensure_success(hapi.GetPartInfo(byref(session),
@@ -92,9 +94,9 @@ def process_geo_parts(session, asset_info, object_node, geo_node, part_id):
                                           attrib_names_sh,
                                           part_info.attributeCounts[hapi.ATTROWNER_POINT]))
     for i in range(part_info.attributeCounts[hapi.ATTROWNER_POINT]):
-        print '\t', attrib_names_sh[i]
+        print('\t', attrib_names_sh[i])
 
-    print 'Point Positions: '
+    print('Point Positions: ')
 
     process_float_attrib(session,
                          asset_info,
@@ -103,7 +105,7 @@ def process_geo_parts(session, asset_info, object_node, geo_node, part_id):
                          hapi.ATTROWNER_POINT,
                          'P')
 
-    print 'Number of Faces: %i' % part_info.faceCount
+    print('Number of Faces: %i' % part_info.faceCount)
 
     if part_info.type != hapi.PARTTYPE_CURVE:
         face_counts = (c_int * part_info.faceCount)()
@@ -113,7 +115,7 @@ def process_geo_parts(session, asset_info, object_node, geo_node, part_id):
                                           face_counts,
                                           0,
                                           part_info.faceCount))
-        print ','.join([str(i) for i in face_counts])
+        print(','.join([str(i) for i in face_counts]))
 
         vertex_list = (c_int * part_info.vertexCount)()
         ensure_success(hapi.GetVertexList(byref(session),
@@ -122,12 +124,12 @@ def process_geo_parts(session, asset_info, object_node, geo_node, part_id):
                                           vertex_list,
                                           0,
                                           part_info.vertexCount))
-        print 'Vertex Indices into Points array:'
+        print('Vertex Indices into Points array:')
         current_idx = 0
         for i in range(part_info.faceCount):
             for j in range(face_counts[i]):
-                print 'Vertex : %i, belong to face: %i, index: %i of points array' % (
-                    current_idx, i, vertex_list[current_idx])
+                print('Vertex : %i, belong to face: %i, index: %i of points array' % (
+                    current_idx, i, vertex_list[current_idx]))
                 current_idx += 1
 
 
@@ -137,9 +139,8 @@ def print_complete_node_info(session, node_id, asset_info):
                                           node_id,
                                           None,
                                           byref(object_count)))
-    print object_count.value
+    print(object_count.value)
     object_infos = (hapi.ObjectInfo * object_count.value)()
-    #print 'hi'
     ensure_success(hapi.GetComposedObjectList(byref(session),
                                               node_id,
                                               object_infos,
@@ -188,7 +189,7 @@ def main():
                                                byref(asset_count)))
 
     if (asset_count.value > 1):
-        print 'Should only be 1 asset'
+        print('Should only be 1 asset')
         sys.exit(1)
 
     asset_sh = hapi.StringHandle()

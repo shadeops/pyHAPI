@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import ctypes
 
 from .version import *

@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import ctypes
 
 _hapi = ctypes.cdll.LoadLibrary('/opt/hfs/dsolib/libHAPIL.so')
