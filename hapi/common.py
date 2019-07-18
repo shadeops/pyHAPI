@@ -1,5 +1,11 @@
-import platform
-from ctypes import Structure, c_int, c_float, c_double, c_uint, c_longlong, c_bool
+from platform import system as _system_platform
+from ctypes import Structure as _Structure
+from ctypes import c_int as _c_int
+from ctypes import c_float as _c_float
+from ctypes import c_double as _c_double
+from ctypes import c_uint as _c_uint
+from ctypes import c_bool as _c_bool
+from ctypes import c_longlong as _c_longlong
 
 POSITION_VECTOR_SIZE           = 3
 SCALE_VECTOR_SIZE              = 3
@@ -52,28 +58,28 @@ CACHE_GL_VERTEX                = 'OpenGL Vertex Cache'
 CACHE_SOP                      = 'SOP Cache'
 CACHE_VEX                      = 'VEX File Cache'
 
-Bool = c_bool
+Bool = _c_bool
 
-Int64 = c_longlong
+Int64 = _c_longlong
 
-if platform.system() == 'Windows':
-    ProcessId = c_uint
+if _system_platform() == 'Windows':
+    ProcessId = _c_uint
 else:
-    ProcessId = c_int
+    ProcessId = _c_int
 
 SessionId = Int64
 
-StringHandle = c_int
+StringHandle = _c_int
 
-AssetLibraryId = c_int
+AssetLibraryId = _c_int
 
-NodeId = c_int
+NodeId = _c_int
 
-ParmId = c_int
+ParmId = _c_int
 
-PartId = c_int
+PartId = _c_int
 
-License = c_int
+License = _c_int
 (
     LICENSE_NONE,
     LICENSE_HOUDINI_ENGINE,
@@ -84,7 +90,7 @@ License = c_int
     LICENSE_MAX
 ) = range(7)
 
-StatusType = c_int
+StatusType = _c_int
 (
     STATUS_CALL_RESULT,
     STATUS_COOK_RESULT,
@@ -92,7 +98,7 @@ StatusType = c_int
     STATUS_MAX
 ) = range(4)
 
-StatusVerbosity = c_int
+StatusVerbosity = _c_int
 STATUSVERBOSITY_0 = 0
 STATUSVERBOSITY_1 = 1
 STATUSVERBOSITY_2 = 2
@@ -103,7 +109,7 @@ STATUSVERBOSITY_ERRORS = STATUSVERBOSITY_0
 STATUSVERBOSITY_WARNINGS = STATUSVERBOSITY_1
 STATUSVERBOSITY_MESSAGES = STATUSVERBOSITY_2
 
-Result = c_int
+Result = _c_int
 
 RESULT_SUCCESS                                 = 0
 RESULT_FAILURE                                 = 1
@@ -131,13 +137,13 @@ RESULT_USER_INTERRUPTED                        = 300
 
 RESULT_INVALID_SESSION                         = 400
 
-ErrorCode = c_int
+ErrorCode = _c_int
 ERRORCODE_ASSET_DEF_NOT_FOUND                  = 1 << 0
 ERRORCODE_PYTHON_NODE_ERROR                    = 1 << 1
 
-ErrorCodeBits = c_int
+ErrorCodeBits = _c_int
 
-SessionType = c_int
+SessionType = _c_int
 (
     SESSION_INPROCESS,
     SESSION_THRIFT,
@@ -147,7 +153,7 @@ SessionType = c_int
     SESSION_MAX
 ) = range(6)
 
-State = c_int
+State = _c_int
 (
     STATE_READY,
     STATE_READY_WITH_FATAL_ERRORS,
@@ -160,7 +166,7 @@ State = c_int
 ) = range(8)
 STATE_MAX_READY_STATE = STATE_READY_WITH_COOK_ERRORS
 
-PackedPrimInstancingMode = c_int
+PackedPrimInstancingMode = _c_int
 (
     PACKEDPRIM_INSTANCING_MODE_INVALID,
     PACKEDPRIM_INSTANCING_MODE_DISABLED,
@@ -169,7 +175,7 @@ PackedPrimInstancingMode = c_int
     PACKEDPRIM_INSTANCING_MODE_MAX
 ) = range(-1,4)
 
-Permissions = c_int
+Permissions = _c_int
 (
     PERMISSIONS_NON_APPLICABLE,
     PERMISSIONS_READ_WRITE,
@@ -178,7 +184,7 @@ Permissions = c_int
     PERMISSIONS_MAX
 ) = range(5)
 
-RampType = c_int
+RampType = _c_int
 (
     RAMPTYPE_INVALID,
     RAMPTYPE_FLOAT,
@@ -186,7 +192,7 @@ RampType = c_int
     RAMPTYPE_MAX,
 ) = range(-1, 3)
 
-ParmType = c_int
+ParmType = _c_int
 (
     PARMTYPE_INT,
     PARMTYPE_MULTIPARMLIST,
@@ -234,7 +240,7 @@ PARMTYPE_CONTAINER_END     = PARMTYPE_FOLDERLIST_RADIO
 PARMTYPE_NONVALUE_START    = PARMTYPE_FOLDER
 PARMTYPE_NONVALUE_END      = PARMTYPE_SEPARATOR
 
-ChoiceListType = c_int
+ChoiceListType = _c_int
 (
     CHOICELISTTYPE_NONE,
     CHOICELISTTYPE_NORMAL,
@@ -243,7 +249,7 @@ ChoiceListType = c_int
     CHOICELISTTYPE_TOGGLE
 ) = range(5)
 
-PresetType = c_int
+PresetType = _c_int
 (
     PRESETTYPE_INVALID,
     PRESETTYPE_BINARY,
@@ -251,7 +257,7 @@ PresetType = c_int
     PRESETTYPE_MAX
 ) = range(-1, 3)
 
-NodeType = c_int
+NodeType = _c_int
 NODETYPE_ANY       = -1
 NODETYPE_NONE      = 0
 NODETYPE_OBJ       = 1 << 0
@@ -263,9 +269,9 @@ NODETYPE_SHOP      = 1 << 5
 NODETYPE_COP       = 1 << 6
 NODETYPE_VOP       = 1 << 7
 NODETYPE_DOP       = 1 << 8
-NodeTypeBits = c_int
+NodeTypeBits = _c_int
 
-NodeFlags = c_int
+NodeFlags = _c_int
 NODEFLAGS_ANY          = -1
 NODEFLAGS_NONE         = 0
 NODEFLAGS_DISPLAY      = 1 << 0
@@ -282,9 +288,9 @@ NODEFLAGS_OBJ_LIGHT    = 1 << 9
 NODEFLAGS_OBJ_SUBNET   = 1 << 10
 
 NODEFLAGS_SOP_CURVE    = 1 << 11
-NodeFlagsBits = c_int
+NodeFlagsBits = _c_int
 
-GroupType = c_int
+GroupType = _c_int
 (
     GROUPTYPE_INVALID,
     GROUPTYPE_POINT,
@@ -292,7 +298,7 @@ GroupType = c_int
     GROUPTYPE_MAX
 ) = range(-1, 3)
 
-AttributeOwner = c_int
+AttributeOwner = _c_int
 (
     ATTROWNER_INVALID,
     ATTROWNER_VERTEX,
@@ -302,7 +308,7 @@ AttributeOwner = c_int
     ATTROWNER_MAX
 ) = range(-1, 5)
 
-CurveType = c_int
+CurveType = _c_int
 (
     CURVETYPE_INVALID,
     CURVETYPE_LINEAR,
@@ -311,7 +317,7 @@ CurveType = c_int
     CURVETYPE_MAX
 ) = range(-1, 4)
 
-VolumeType = c_int
+VolumeType = _c_int
 (
     VOLUMETYPE_INVALID,
     VOLUMETYPE_HOUDINI,
@@ -319,7 +325,7 @@ VolumeType = c_int
     VOLUMETYPE_MAX
 ) = range(-1, 3)
 
-StorageType = c_int
+StorageType = _c_int
 (
     STORAGETYPE_INVALID,
     STORAGETYPE_INT,
@@ -330,7 +336,7 @@ StorageType = c_int
     STORAGETYPE_MAX
 ) = range(-1, 6)
 
-GeoType = c_int
+GeoType = _c_int
 (
     GEOTYPE_INVALID,
     GEOTYPE_DEFAULT,
@@ -340,7 +346,7 @@ GeoType = c_int
     GEOTYPE_MAX
 ) = range(-1, 5)
 
-PartType = c_int
+PartType = _c_int
 (
     PARTTYPE_INVALID,
     PARTTYPE_MESH,
@@ -352,7 +358,7 @@ PartType = c_int
     PARTTYPE_MAX
 ) = range(-1, 7)
 
-InputType = c_int
+InputType = _c_int
 (
     INPUT_INVALID,
     INPUT_TRANSFORM,
@@ -360,14 +366,14 @@ InputType = c_int
     INPUT_MAX
 ) = range(-1, 3)
 
-CurveOrders = c_int
+CurveOrders = _c_int
 CURVE_ORDER_VARYING =   0
 CURVE_ORDER_INVALID =   1
 CURVE_ORDER_LINEAR =    2
 CURVE_ORDER_QUADRATIC = 3
 CURVE_ORDER_CUBIC =     4
 
-TransformComponent = c_int
+TransformComponent = _c_int
 (
     TRANSFORM_TX,
     TRANSFORM_TY,
@@ -384,7 +390,7 @@ TransformComponent = c_int
     TRANSFORM_SZ
 ) = range(13)
 
-RSTOrder = c_int
+RSTOrder = _c_int
 (
     TRS,
     TSR,
@@ -395,7 +401,7 @@ RSTOrder = c_int
 ) = range(6)
 RSTORDER_DEFAULT = SRT
 
-XYZOrder = c_int
+XYZOrder = _c_int
 (
     XYZ,
     XZY,
@@ -406,7 +412,7 @@ XYZOrder = c_int
 ) = range(6)
 XYZORDER_DEFAULT = XYZ
 
-ImageDataFormat = c_int
+ImageDataFormat = _c_int
 (
     IMAGE_DATA_UNKNOWN,
     IMAGE_DATA_INT8,
@@ -418,7 +424,7 @@ ImageDataFormat = c_int
 ) = range(-1,6)
 IMAGE_DATA_DEFAULT = IMAGE_DATA_INT8
 
-ImagePacking = c_int
+ImagePacking = _c_int
 (
     IMAGE_PACKING_UNKNOWN,
     IMAGE_PACKING_SINGLE,
@@ -432,9 +438,9 @@ ImagePacking = c_int
 IMAGE_PACKING_DEFAULT3 = IMAGE_PACKING_RGB
 IMAGE_PACKING_DEFAULT4 = IMAGE_PACKING_RGBA
 
-EnvIntType = c_int
+EnvIntType = _c_int
 
-ENVINT_INVALID = c_int(-1)
+ENVINT_INVALID = _c_int(-1)
 
 ENVINT_VERSION_HOUDINI_MAJOR = 100
 ENVINT_VERSION_HOUDINI_MINOR = 110
@@ -448,7 +454,7 @@ ENVINT_VERSION_HOUDINI_ENGINE_API = 220
 
 ENVINT_MAX = ENVINT_VERSION_HOUDINI_ENGINE_API+1
 
-SessionEnvIntType = c_int
+SessionEnvIntType = _c_int
 
 SESSIONENVINT_INVALID = -1
 
@@ -456,7 +462,7 @@ SESSIONENVINT_LICENSE = 100
 
 SESSIONENVINT_MAX = SESSIONENVINT_LICENSE+1
 
-CacheProperty = c_int
+CacheProperty = _c_int
 (
     CACHEPROP_CURRENT,
 
@@ -471,44 +477,44 @@ CacheProperty = c_int
 
 # GENERICS -----------------------------------------------------------------
 
-class Transform(Structure):
-    _fields_ = [('position', c_float * POSITION_VECTOR_SIZE),
-                ('rotationQuaternion', c_float * QUATERNION_VECTOR_SIZE),
-                ('scale', c_float * SCALE_VECTOR_SIZE),
-                ('shear', c_float * SHEAR_VECTOR_SIZE),
+class Transform(_Structure):
+    _fields_ = [('position', _c_float * POSITION_VECTOR_SIZE),
+                ('rotationQuaternion', _c_float * QUATERNION_VECTOR_SIZE),
+                ('scale', _c_float * SCALE_VECTOR_SIZE),
+                ('shear', _c_float * SHEAR_VECTOR_SIZE),
 
                 ('rstOrder', RSTOrder)]
 
-class TransformEuler(Structure):
-    _fields_ = [('position', c_float * POSITION_VECTOR_SIZE),
-                ('rotationEuler', c_float * EULER_VECTOR_SIZE),
-                ('scale', c_float * SCALE_VECTOR_SIZE),
-                ('shear', c_float * SHEAR_VECTOR_SIZE),
+class TransformEuler(_Structure):
+    _fields_ = [('position', _c_float * POSITION_VECTOR_SIZE),
+                ('rotationEuler', _c_float * EULER_VECTOR_SIZE),
+                ('scale', _c_float * SCALE_VECTOR_SIZE),
+                ('shear', _c_float * SHEAR_VECTOR_SIZE),
 
                 ('rotationOrder', XYZOrder),
                 ('rstOrder', RSTOrder)]
 
 # SESSIONS -----------------------------------------------------------------
 
-class Session(Structure):
+class Session(_Structure):
     _fields_= [('type', SessionType),
                ('id', SessionId)]
 
-class ThriftServerOptions(Structure):
+class ThriftServerOptions(_Structure):
     _fields_ = [('autoClose', Bool),
-                ('timeoutMs', c_float)]
+                ('timeoutMs', _c_float)]
 
 # TIME ---------------------------------------------------------------------
 
-class TimelineOptions(Structure):
-    _fields_= [('fps',c_float),
-               ('startTime',c_float),
-               ('endTime',c_float)]
+class TimelineOptions(_Structure):
+    _fields_= [('fps',_c_float),
+               ('startTime',_c_float),
+               ('endTime',_c_float)]
 
 
 # ASSETS -------------------------------------------------------------------
 
-class AssetInfo(Structure):
+class AssetInfo(_Structure):
     _fields_ = [
                 ('nodeId', NodeId),
                 ('objectNodeId', NodeId),
@@ -519,65 +525,65 @@ class AssetInfo(Structure):
                 ('versionSH', StringHandle),
                 ('fullOpNameSH', StringHandle),
                 ('helpTextSH', StringHandle),
-                ('objectCount', c_int),
-                ('handleCount', c_int),
-                ('transformInputCount', c_int),
-                ('geoInputCount', c_int),
-                ('haveObjectsChanged', c_int),
+                ('objectCount', _c_int),
+                ('handleCount', _c_int),
+                ('transformInputCount', _c_int),
+                ('geoInputCount', _c_int),
+                ('haveObjectsChanged', _c_int),
                 ('haveMaterialsChanged', Bool)
                 ]
 
-class CookOptions(Structure):
+class CookOptions(_Structure):
     _fields_ = [
                 ('splitGeosByGroup', Bool),
-                ('maxVerticesPerPrimitive', c_int),
+                ('maxVerticesPerPrimitive', _c_int),
                 ('refineCurveToLinear', Bool),
-                ('curveRefineLOD', c_float),
+                ('curveRefineLOD', _c_float),
                 ('clearErrorsAndWarnings', Bool),
                 ('cookTemplatedGeos', Bool),
                 ('splitPointsByVertexAttributes', Bool),
                 ('packedPrimInstancingMode', PackedPrimInstancingMode),
                 ('handleBoxPartTypes', Bool),
                 ('handleSpherePartTypes', Bool),
-                ('extraFlags', c_int)
+                ('extraFlags', _c_int)
                 ]
 
 # NODES --------------------------------------------------------------------
 
-class NodeInfo(Structure):
+class NodeInfo(_Structure):
     _fields_ = [('id', NodeId),
                 ('parentId', NodeId),
                 ('nameSH', StringHandle),
                 ('type', NodeType),
                 ('isValid', Bool),
-                ('totalCookCount', c_int),
-                ('uniqueHoudiniNodeId', c_int),
+                ('totalCookCount', _c_int),
+                ('uniqueHoudiniNodeId', _c_int),
                 ('internalNodePathSH', StringHandle),
-                ('parmCount', c_int),
-                ('parmIntValueCount', c_int),
-                ('parmFloatValueCount', c_int),
-                ('parmStringValueCount', c_int),
-                ('parmChoiceCount', c_int),
-                ('childNodeCount', c_int),
-                ('inputCount', c_int),
+                ('parmCount', _c_int),
+                ('parmIntValueCount', _c_int),
+                ('parmFloatValueCount', _c_int),
+                ('parmStringValueCount', _c_int),
+                ('parmChoiceCount', _c_int),
+                ('childNodeCount', _c_int),
+                ('inputCount', _c_int),
                 ('createdPostAssetLoad', Bool)
                 ]
 
 
 # PARAMETERS ---------------------------------------------------------------
 
-class ParmInfo(Structure):
+class ParmInfo(_Structure):
     _fields_ = [
                 ('id', ParmId),
                 ('parentId', ParmId),
-                ('childIndex', c_int),
+                ('childIndex', _c_int),
                 ('type', ParmType),
                 ('typeInfoSH', StringHandle),
                 ('permissions', Permissions),
-                ('tagCount', c_int),
-                ('size', c_int),
+                ('tagCount', _c_int),
+                ('size', _c_int),
                 ('choiceListType', ChoiceListType),
-                ('choiceCount', c_int),
+                ('choiceCount', _c_int),
                 ('nameSH', StringHandle),
                 ('labelSH', StringHandle),
                 ('templateNameSH', StringHandle),
@@ -586,30 +592,30 @@ class ParmInfo(Structure):
                 ('hasMax', Bool),
                 ('hasUIMin', Bool),
                 ('hasUIMax', Bool),
-                ('min', c_float),
-                ('max', c_float),
-                ('UIMin', c_float),
-                ('UIMax', c_float),
+                ('min', _c_float),
+                ('max', _c_float),
+                ('UIMin', _c_float),
+                ('UIMax', _c_float),
                 ('invisible', Bool),
                 ('disabled', Bool),
                 ('spare', Bool),
                 ('joinNext', Bool),
                 ('labelNone', Bool),
-                ('intValuesIndex', c_int),
-                ('floatValuesIndex', c_int),
-                ('stringValuesIndex', c_int),
-                ('choiceIndex', c_int),
+                ('intValuesIndex', _c_int),
+                ('floatValuesIndex', _c_int),
+                ('stringValuesIndex', _c_int),
+                ('choiceIndex', _c_int),
                 ('inputNodeType', NodeType),
                 ('inputNodeFlag', NodeFlags),
                 ('isChildOfMultiParm', Bool),
-                ('instanceNum', c_int),
-                ('instanceLength', c_int),
-                ('instanceCount', c_int),
-                ('instanceStartOffset', c_int),
+                ('instanceNum', _c_int),
+                ('instanceLength', _c_int),
+                ('instanceCount', _c_int),
+                ('instanceStartOffset', _c_int),
                 ('rampType', RampType)
                ]
 
-class ParmChoiceInfo(Structure):
+class ParmChoiceInfo(_Structure):
     _fields_ = [
                 ('parentParmId', ParmId),
                 ('labelSH', StringHandle),
@@ -618,14 +624,14 @@ class ParmChoiceInfo(Structure):
 
 # HANDLES ------------------------------------------------------------------
 
-class HandleInfo(Structure):
+class HandleInfo(_Structure):
     _fields_ = [
                 ('nameSH', StringHandle),
                 ('typeNameSH', StringHandle),
-                ('bindingsCount', c_int)
+                ('bindingsCount', _c_int)
                ]
 
-class HandleBindingInfo(Structure):
+class HandleBindingInfo(_Structure):
     _fields_ = [
                 ('handleParmNameSH', StringHandle),
                 ('assetParmNameSH', StringHandle),
@@ -634,7 +640,7 @@ class HandleBindingInfo(Structure):
 
 # OBJECTS ------------------------------------------------------------------
 
-class ObjectInfo(Structure):
+class ObjectInfo(_Structure):
     _fields_ = [
                 ('nameSH', StringHandle),
                 ('objectInstancePathSH', StringHandle),
@@ -643,14 +649,14 @@ class ObjectInfo(Structure):
                 ('isVisible', Bool),
                 ('isInstancer', Bool),
                 ('isInstanced', Bool),
-                ('geoCount', c_int),
+                ('geoCount', _c_int),
                 ('nodeId', NodeId),
                 ('objectToInstanceId', NodeId)
                ]
 
 # GEOMETRY -----------------------------------------------------------------
 
-class GeoInfo(Structure):
+class GeoInfo(_Structure):
     _fields_ = [
                 ('type', GeoType),
                 ('nameSH', StringHandle),
@@ -660,127 +666,127 @@ class GeoInfo(Structure):
                 ('isDisplayGeo', Bool),
                 ('hasGeoChanged', Bool),
                 ('hasMaterialChanged', Bool),
-                ('pointGroupCount', c_int),
-                ('primitiveGroupCount', c_int),
-                ('partCount', c_int),
+                ('pointGroupCount', _c_int),
+                ('primitiveGroupCount', _c_int),
+                ('partCount', _c_int),
                ]
 
-class PartInfo(Structure):
+class PartInfo(_Structure):
     _fields_ = [
                 ('id', PartId),
                 ('nameSH', StringHandle),
                 ('type', PartType),
-                ('faceCount', c_int),
-                ('vertexCount', c_int),
-                ('pointCount', c_int),
-                ('attributeCounts', c_int * ATTROWNER_MAX),
+                ('faceCount', _c_int),
+                ('vertexCount', _c_int),
+                ('pointCount', _c_int),
+                ('attributeCounts', _c_int * ATTROWNER_MAX),
                 ('isInstanced', Bool),
-                ('instancedPartCount', c_int),
-                ('instanceCount', c_int)
+                ('instancedPartCount', _c_int),
+                ('instanceCount', _c_int)
                ]
 
-class AttributeInfo(Structure):
+class AttributeInfo(_Structure):
     _fields_ = [
                 ('exists', Bool),
                 ('owner', AttributeOwner),
                 ('storage', StorageType),
                 ('originalOwner', AttributeOwner),
-                ('count', c_int),
-                ('tupleSize', c_int)
+                ('count', _c_int),
+                ('tupleSize', _c_int)
                 ]
 
 # MATERIALS ----------------------------------------------------------------
 
-class MaterialInfo(Structure):
+class MaterialInfo(_Structure):
     _fields_ = [
                 ('nodeId', NodeId),
                 ('exists', Bool),
                 ('hasChanged', Bool)
                ]
 
-class ImageFileFormat(Structure):
+class ImageFileFormat(_Structure):
     _fields_ = [
                 ('nameSH', StringHandle),
                 ('descriptionSH', StringHandle),
                 ('defaultExtensionSH', StringHandle)
                 ]
 
-class ImageInfo(Structure):
+class ImageInfo(_Structure):
     _fields_ = [
                 ('imageFileFormatNameSH', StringHandle),
-                ('xRes', c_int),
-                ('yRes', c_int),
+                ('xRes', _c_int),
+                ('yRes', _c_int),
                 ('dataFormat', ImageDataFormat),
                 ('interleaved', Bool),
                 ('packing', ImagePacking),
-                ('gamma', c_double)
+                ('gamma', _c_double)
                ]
 
 # ANIMATION ----------------------------------------------------------------
 
-class Keyframe(Structure):
+class Keyframe(_Structure):
     _fields_ = [
-                ('time', c_float),
-                ('value', c_float),
-                ('inTangent', c_float),
-                ('outtangent', c_float)
+                ('time', _c_float),
+                ('value', _c_float),
+                ('inTangent', _c_float),
+                ('outtangent', _c_float)
                 ]
 
 # VOLUMES ------------------------------------------------------------------
 
-class VolumeInfo(Structure):
+class VolumeInfo(_Structure):
     _fields_ = [
                 ('nameSH', StringHandle),
                 ('type', VolumeType),
-                ('xLength', c_int),
-                ('yLength', c_int),
-                ('zLength', c_int),
-                ('minX', c_int),
-                ('minY', c_int),
-                ('minZ', c_int),
-                ('tupleSize', c_int),
+                ('xLength', _c_int),
+                ('yLength', _c_int),
+                ('zLength', _c_int),
+                ('minX', _c_int),
+                ('minY', _c_int),
+                ('minZ', _c_int),
+                ('tupleSize', _c_int),
                 ('storage', StorageType),
-                ('tileSize', c_int),
+                ('tileSize', _c_int),
                 ('transform', Transform),
                 ('hasTaper', Bool),
-                ('xTaper', c_float),
-                ('yTaper', c_float)
+                ('xTaper', _c_float),
+                ('yTaper', _c_float)
                ]
 
-class VolumeTileInfo(Structure):
+class VolumeTileInfo(_Structure):
     _fields_ = [
-                ('minX', c_int),
-                ('minY', c_int),
-                ('minZ', c_int),
+                ('minX', _c_int),
+                ('minY', _c_int),
+                ('minZ', _c_int),
                 ('isValid', Bool)
                 ]
 
 # CURVES -------------------------------------------------------------------
 
-class CurveInfo(Structure):
+class CurveInfo(_Structure):
     _fields_ = [
                 ('curveType', CurveType),
-                ('curveCount', c_int),
-                ('vertexCount', c_int),
-                ('knotCount', c_int),
+                ('curveCount', _c_int),
+                ('vertexCount', _c_int),
+                ('knotCount', _c_int),
                 ('isPeriodic', Bool),
                 ('isRational', Bool),
-                ('order', c_int),
+                ('order', _c_int),
                 ('hasKnots', Bool)
                ]
 
 # BASIC PRIMITIVES ---------------------------------------------------------
 
-class BoxInfo(Structure):
+class BoxInfo(_Structure):
     _fields_ = [
-                ('center', c_float * POSITION_VECTOR_SIZE),
-                ('size', c_float * SCALE_VECTOR_SIZE),
-                ('rotation', c_float * EULER_VECTOR_SIZE)
+                ('center', _c_float * POSITION_VECTOR_SIZE),
+                ('size', _c_float * SCALE_VECTOR_SIZE),
+                ('rotation', _c_float * EULER_VECTOR_SIZE)
                ]
 
-class SphereInfo(Structure):
+class SphereInfo(_Structure):
     _fields_ = [
-                ('center', c_float * POSITION_VECTOR_SIZE),
-                ('radius', c_float)
+                ('center', _c_float * POSITION_VECTOR_SIZE),
+                ('radius', _c_float)
                ]
 
