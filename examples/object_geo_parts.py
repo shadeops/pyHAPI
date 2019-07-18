@@ -74,7 +74,7 @@ def process_float_attrib(session, asset_info, geo_node, part_id, owner, name):
                                               attrib_info.count))
     for elm_idx in range(attrib_info.count):
         for tuple_idx in range(attrib_info.tupleSize):
-            print(attrib_data[elm_idx * attrib_info.tupleSize + tuple_idx], end='')
+            print(attrib_data[elm_idx * attrib_info.tupleSize + tuple_idx], end=' ')
         print()
     return
 
