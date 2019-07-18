@@ -336,6 +336,26 @@ StorageType = _c_int
     STORAGETYPE_MAX
 ) = range(-1, 6)
 
+AttributeTypeInfo = _c_int
+(
+    ATTRIBUTE_TYPE_INVALID,
+    ATTRIBUTE_TYPE_NONE,
+    ATTRIBUTE_TYPE_POINT,
+    ATTRIBUTE_TYPE_HPOINT,
+    ATTRIBUTE_TYPE_VECTOR,
+    ATTRIBUTE_TYPE_NORMAL,
+    ATTRIBUTE_TYPE_COLOR,
+    ATTRIBUTE_TYPE_QUATERNION,
+    ATTRIBUTE_TYPE_MATRIX3,
+    ATTRIBUTE_TYPE_MATRIX,
+    ATTRIBUTE_TYPE_ST,
+    ATTRIBUTE_TYPE_HIDDEN,
+    ATTRIBUTE_TYPE_BOX2,
+    ATTRIBUTE_TYPE_BOX,
+    ATTRIBUTE_TYPE_TEXTURE,
+    ATTRIBUTE_TYPE_MAX
+) = range(-1, 15)
+
 GeoType = _c_int
 (
     GEOTYPE_INVALID,
@@ -692,7 +712,8 @@ class AttributeInfo(_Structure):
                 ('storage', StorageType),
                 ('originalOwner', AttributeOwner),
                 ('count', _c_int),
-                ('tupleSize', _c_int)
+                ('tupleSize', _c_int),
+                ('typeInfo', AttributeTypeInfo)
                 ]
 
 # MATERIALS ----------------------------------------------------------------

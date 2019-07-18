@@ -286,7 +286,6 @@ SaveHIPFile.argtypes = [ _ctypes.POINTER(Session),
                             _ctypes.c_char_p,
                             Bool]
 
-
 IsNodeValid = _hapi.HAPI_IsNodeValid
 IsNodeValid.restype = Result
 IsNodeValid.argtypes = [ _ctypes.POINTER(Session),
@@ -441,12 +440,56 @@ ParmHasTag.argtypes = [ _ctypes.POINTER(Session),
                         _ctypes.c_char_p,
                         _ctypes.POINTER(Bool) ]
 
+ParmHasExpression = _hapi.HAPI_ParmHasExpression
+ParmHasExpression.restype = Result
+ParmHasExpression.argtypes = [ _ctypes.POINTER(Session),
+                               NodeId,
+                               _ctypes.c_char_p,
+                               _ctypes.c_int,
+                               _ctypes.POINTER(Bool) ]
+
 GetParmWithTag = _hapi.HAPI_GetParmWithTag
 GetParmWithTag.restype = Result
 GetParmWithTag.argtypes = [ _ctypes.POINTER(Session),
                             NodeId,
                             _ctypes.c_char_p,
                             _ctypes.POINTER(ParmId) ]
+
+GetParmExpression = _hapi.HAPI_GetParmExpression
+GetParmExpression.restype = Result
+GetParmExpression.argtypes = [ _ctypes.POINTER(Session),
+                               NodeId,
+                               _ctypes.c_char_p,
+                               _ctypes.c_int,
+                               _ctypes.POINTER(StringHandle) ]
+
+RevertParmToDefault = _hapi.HAPI_RevertParmToDefault
+RevertParmToDefault.restype = Result
+RevertParmToDefault.argtypes = [ _ctypes.POINTER(Session),
+                                 NodeId,
+                                 _ctypes.c_char_p,
+                                 _ctypes.c_int ]
+
+RevertParmToDefaults = _hapi.HAPI_RevertParmToDefaults
+RevertParmToDefaults.restype = Result
+RevertParmToDefaults.argtypes = [ _ctypes.POINTER(Session),
+                                  NodeId,
+                                  _ctypes.c_char_p ]
+
+SetParmExpression = _hapi.HAPI_SetParmExpression
+SetParmExpression.restype = Result
+SetParmExpression.argtypes = [ _ctypes.POINTER(Session),
+                               NodeId,
+                               _ctypes.c_char_p,
+                               ParmId,
+                               _ctypes.c_int ]
+
+RemoveParmExpression = _hapi.HAPI_RemoveParmExpression
+RemoveParmExpression.restype = Result
+RemoveParmExpression.argtypes = [ _ctypes.POINTER(Session),
+                                  NodeId,
+                                  ParmId,
+                                  _ctypes.c_int ]
 
 GetParmIntValue = _hapi.HAPI_GetParmIntValue
 GetParmIntValue.restype = Result
@@ -797,7 +840,7 @@ GetAttributeStringData.argtypes = [ _ctypes.POINTER(Session),
                                     _ctypes.c_char_p,
                                     _ctypes.POINTER(AttributeInfo),
                                     _ctypes.POINTER(StringHandle),
-                                    _ctypes.c_int, 
+                                    _ctypes.c_int,
                                     _ctypes.c_int ]
 
 GetGroupNames = _hapi.HAPI_GetGroupNames
@@ -819,6 +862,35 @@ GetGroupMembership.argtypes = [ _ctypes.POINTER(Session),
                                 _ctypes.POINTER(_ctypes.c_int),
                                 _ctypes.c_int,
                                 _ctypes.c_int ]
+
+GetGroupCountOnPackedInstancePart = _hapi.HAPI_GetGroupCountOnPackedInstancePart
+GetGroupCountOnPackedInstancePart.restype = Result
+GetGroupCountOnPackedInstancePart.argtypes = [ _ctypes.POINTER(Session),
+                                               NodeId,
+                                               PartId,
+                                               _ctypes.POINTER(_ctypes.c_int),
+                                               _ctypes.POINTER(_ctypes.c_int) ]
+
+GetGroupNamesOnPackedInstancePart = _hapi.HAPI_GetGroupNamesOnPackedInstancePart
+GetGroupNamesOnPackedInstancePart.restype = Result
+GetGroupNamesOnPackedInstancePart.argtypes = [ _ctypes.POINTER(Session),
+                                               NodeId,
+                                               PartId,
+                                               GroupType,
+                                               _ctypes.POINTER(StringHandle),
+                                               _ctypes.c_int ]
+
+GetGroupMembershipOnPackedInstancePart = _hapi.HAPI_GetGroupMembershipOnPackedInstancePart
+GetGroupMembershipOnPackedInstancePart.restype = Result
+GetGroupMembershipOnPackedInstancePart.argtypes = [ _ctypes.POINTER(Session),
+                                                    NodeId,
+                                                    PartId,
+                                                    GroupType,
+                                                    _ctypes.c_char_p,
+                                                    _ctypes.POINTER(Bool),
+                                                    _ctypes.POINTER(_ctypes.c_int),
+                                                    _ctypes.c_int,
+                                                    _ctypes.c_int ]
 
 GetInstancedPartIds = _hapi.HAPI_GetInstancedPartIds
 GetInstancedPartIds.restype = Result
