@@ -79,6 +79,10 @@ ParmId = _c_int
 
 PartId = _c_int
 
+PDG_WorkitemId = _c_int
+
+PDG_GraphContextId = _c_int
+
 License = _c_int
 (
     LICENSE_NONE,
@@ -215,9 +219,10 @@ ParmType = _c_int
     PARMTYPE_FOLDER,
     PARMTYPE_LABEL,
     PARMTYPE_SEPARATOR,
+    PARMTYPE_PATH_FILE_DIR,
 
     PARMTYPE_MAX
-) = range(17)
+) = range(18)
 
 PARMTYPE_INT_START         = PARMTYPE_INT
 PARMTYPE_INT_END           = PARMTYPE_BUTTON
@@ -239,6 +244,59 @@ PARMTYPE_CONTAINER_END     = PARMTYPE_FOLDERLIST_RADIO
 
 PARMTYPE_NONVALUE_START    = PARMTYPE_FOLDER
 PARMTYPE_NONVALUE_END      = PARMTYPE_SEPARATOR
+
+PrmScriptType = _c_int
+(
+    PRM_SCRIPT_TYPE_INT,
+    PRM_SCRIPT_TYPE_FLOAT,
+    PRM_SCRIPT_TYPE_ANGLE,
+    PRM_SCRIPT_TYPE_STRING,
+    PRM_SCRIPT_TYPE_FILE,
+    PRM_SCRIPT_TYPE_DIRECTORY,
+    PRM_SCRIPT_TYPE_IMAGE,
+    PRM_SCRIPT_TYPE_GEOMETRY,
+    PRM_SCRIPT_TYPE_TOGGLE,
+    PRM_SCRIPT_TYPE_BUTTON,
+    PRM_SCRIPT_TYPE_VECTOR2,
+    PRM_SCRIPT_TYPE_VECTOR3,
+    PRM_SCRIPT_TYPE_VECTOR4,
+    PRM_SCRIPT_TYPE_INTVECTOR2,
+    PRM_SCRIPT_TYPE_INTVECTOR3,
+    PRM_SCRIPT_TYPE_INTVECTOR4,
+    PRM_SCRIPT_TYPE_UV,
+    PRM_SCRIPT_TYPE_UVW,
+    PRM_SCRIPT_TYPE_DIR,
+    PRM_SCRIPT_TYPE_COLOR,
+    PRM_SCRIPT_TYPE_COLOR4,
+    PRM_SCRIPT_TYPE_OPPATH,
+    PRM_SCRIPT_TYPE_OPLIST,
+    PRM_SCRIPT_TYPE_OBJECT,
+    PRM_SCRIPT_TYPE_OBJECTLIST,
+    PRM_SCRIPT_TYPE_RENDER,
+    PRM_SCRIPT_TYPE_SEPARATOR,
+    PRM_SCRIPT_TYPE_GEOMETRY_DATA,
+    PRM_SCRIPT_TYPE_KEY_VALUE_DICT,
+    PRM_SCRIPT_TYPE_LABEL,
+    PRM_SCRIPT_TYPE_RGBAMASK,
+    PRM_SCRIPT_TYPE_ORDINAL,
+    PRM_SCRIPT_TYPE_RAMP_FLT,
+    PRM_SCRIPT_TYPE_RAMP_RGB,
+    PRM_SCRIPT_TYPE_FLOAT_LOG,
+    PRM_SCRIPT_TYPE_INT_LOG,
+    PRM_SCRIPT_TYPE_DATA,
+    PRM_SCRIPT_TYPE_FLOAT_MINMAX,
+    PRM_SCRIPT_TYPE_INT_MINMAX,
+    PRM_SCRIPT_TYPE_INT_STARTEND,
+    PRM_SCRIPT_TYPE_BUTTONSTRIP,
+    PRM_SCRIPT_TYPE_ICONSTRIP
+) = range(42)
+(
+    PRM_SCRIPT_TYPE_GROUPRADIO,
+    PRM_SCRIPT_TYPE_GROUPCOLLAPSIBLE,
+    PRM_SCRIPT_TYPE_GROUPSIMPLE,
+    PRM_SCRIPT_TYPE_GROUP
+) = range(1000, 1004)
+
 
 ChoiceListType = _c_int
 (
@@ -262,13 +320,13 @@ NODETYPE_ANY       = -1
 NODETYPE_NONE      = 0
 NODETYPE_OBJ       = 1 << 0
 NODETYPE_SOP       = 1 << 1
-NODETYPE_POP       = 1 << 2
-NODETYPE_CHOP      = 1 << 3
-NODETYPE_ROP       = 1 << 4
-NODETYPE_SHOP      = 1 << 5
-NODETYPE_COP       = 1 << 6
-NODETYPE_VOP       = 1 << 7
-NODETYPE_DOP       = 1 << 8
+NODETYPE_CHOP      = 1 << 2
+NODETYPE_ROP       = 1 << 3
+NODETYPE_SHOP      = 1 << 4
+NODETYPE_COP       = 1 << 5
+NODETYPE_VOP       = 1 << 6
+NODETYPE_DOP       = 1 << 7
+NODETYPE_TOP       = 1 << 8
 NodeTypeBits = _c_int
 
 NodeFlags = _c_int
@@ -288,6 +346,10 @@ NODEFLAGS_OBJ_LIGHT    = 1 << 9
 NODEFLAGS_OBJ_SUBNET   = 1 << 10
 
 NODEFLAGS_SOP_CURVE    = 1 << 11
+NODEFLAGS_SOP_GUIDE    = 1 << 12
+
+NODEFLAGS_TOP_NONSCHEDULER = 1 << 13
+
 NodeFlagsBits = _c_int
 
 GroupType = _c_int
@@ -493,6 +555,43 @@ CacheProperty = _c_int
     CACHEPROP_CULL_LEVEL,
 ) = range(6)
 
+PDG_State = _c_int
+(
+    PDG_STATE_READY,
+    PDG_STATE_COOKING,
+    PDG_STATE_MAX
+) = range(3)
+PDG_STATE_MAX_READY_STATE = PDG_STATE_READY
+
+PDG_EventType = _c_int
+PDG_EVENT_NULL = 0x0000
+PDG_EVENT_WORKITEM_ADD = 0x0001
+PDG_EVENT_WORKITEM_REMOVE = 0x0002
+PDG_EVENT_WORKITEM_STATE_CHANGE = 0x0004
+PDG_EVENT_WORKITEM_ADD_DEP = 0x0008
+PDG_EVENT_WORKITEM_REMOVE_DEP = 0x0010
+PDG_EVENT_WORKITEM_ADD_PARENT = 0x0020
+PDG_EVENT_WORKITEM_REMOVE_PARENT = 0x0040
+PDG_EVENT_NODE_CLEAR = 0x0080
+PDG_EVENT_DIRTY_START = 0x0800
+PDG_EVENT_DIRTY_STOP = 0x1000
+PDG_EVENT_COOK_ERROR = 0x0100
+PDG_EVENT_COOK_WARNING = 0x0200
+PDG_EVENT_COOK_COMPLETE = 0x0400
+
+PDG_WorkitemState = _c_int
+(
+    PDG_WORKITEM_UNDEFINED,
+    PDG_WORKITEM_UNCOOKED,
+    PDG_WORKITEM_WAITING,
+    PDG_WORKITEM_SCHEDULED,
+    PDG_WORKITEM_COOKING,
+    PDG_WORKITEM_COOKED_SUCCESS,
+    PDG_WORKITEM_COOKED_FAIL,
+    PDG_WORKITEM_COOKED_CANCEL,
+    PDG_WORKITEM_DIRTY
+) = range(9)
+
 # Main API Structs
 
 # GENERICS -----------------------------------------------------------------
@@ -549,6 +648,7 @@ class AssetInfo(_Structure):
                 ('handleCount', _c_int),
                 ('transformInputCount', _c_int),
                 ('geoInputCount', _c_int),
+                ('getOutputCount', _c_int),
                 ('haveObjectsChanged', _c_int),
                 ('haveMaterialsChanged', Bool)
                 ]
@@ -556,6 +656,8 @@ class AssetInfo(_Structure):
 class CookOptions(_Structure):
     _fields_ = [
                 ('splitGeosByGroup', Bool),
+                ('splitGeosByAttribute', Bool),
+                ('splitAttrSH', StringHandle),
                 ('maxVerticesPerPrimitive', _c_int),
                 ('refineCurveToLinear', Bool),
                 ('curveRefineLOD', _c_float),
@@ -565,6 +667,7 @@ class CookOptions(_Structure):
                 ('packedPrimInstancingMode', PackedPrimInstancingMode),
                 ('handleBoxPartTypes', Bool),
                 ('handleSpherePartTypes', Bool),
+                ('checkPartChanges', Bool),
                 ('extraFlags', _c_int)
                 ]
 
@@ -586,7 +689,9 @@ class NodeInfo(_Structure):
                 ('parmChoiceCount', _c_int),
                 ('childNodeCount', _c_int),
                 ('inputCount', _c_int),
-                ('createdPostAssetLoad', Bool)
+                ('outputCount', _c_int),
+                ('createdPostAssetLoad', Bool),
+                ('isTimeDependent', Bool)
                 ]
 
 
@@ -598,6 +703,7 @@ class ParmInfo(_Structure):
                 ('parentId', ParmId),
                 ('childIndex', _c_int),
                 ('type', ParmType),
+                ('scriptType', PrmScriptType),
                 ('typeInfoSH', StringHandle),
                 ('permissions', Permissions),
                 ('tagCount', _c_int),
@@ -632,7 +738,9 @@ class ParmInfo(_Structure):
                 ('instanceLength', _c_int),
                 ('instanceCount', _c_int),
                 ('instanceStartOffset', _c_int),
-                ('rampType', RampType)
+                ('rampType', RampType),
+                ('visibilityConditionSH', StringHandle),
+                ('disabledConditionSH', StringHandle),
                ]
 
 class ParmChoiceInfo(_Structure):
@@ -655,7 +763,8 @@ class HandleBindingInfo(_Structure):
     _fields_ = [
                 ('handleParmNameSH', StringHandle),
                 ('assetParmNameSH', StringHandle),
-                ('assetParmId', ParmId)
+                ('assetParmId', ParmId),
+                ('assetParmIndex', _c_int),
                ]
 
 # OBJECTS ------------------------------------------------------------------
@@ -702,7 +811,8 @@ class PartInfo(_Structure):
                 ('attributeCounts', _c_int * ATTROWNER_MAX),
                 ('isInstanced', Bool),
                 ('instancedPartCount', _c_int),
-                ('instanceCount', _c_int)
+                ('instanceCount', _c_int),
+                ('hasChanged', Bool),
                ]
 
 class AttributeInfo(_Structure):
@@ -810,4 +920,30 @@ class SphereInfo(_Structure):
                 ('center', _c_float * POSITION_VECTOR_SIZE),
                 ('radius', _c_float)
                ]
+
+# PDG Structs ---------------------------------------------------------------
+
+class PDG_EventInfo(_Structure):
+    _fields_ = [
+                ('nodeId', NodeId),
+                ('workitemId', PDG_WorkitemId),
+                ('dependencyId', PDG_WorkitemId),
+                ('currentState', PDG_WorkitemState),
+                ('lastState', PDG_WorkitemState),
+                ('eventType', PDG_EventType),
+                ]
+
+class PDG_WorkitemInfo(_Structure):
+    _fields_ = [
+                ('index', _c_int),
+                ('numResults', _c_int),
+                ('nameSH', StringHandle)
+                ]
+
+class PDG_WorkitemResultInfo(_Structure):
+    _fields_ = [
+                ('resultSH', StringHandle),
+                ('resultTagSH', StringHandle),
+                ('resultHash', Int64),
+                ]
 

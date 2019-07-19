@@ -98,6 +98,18 @@ GetServerEnvString.argtypes = [ _ctypes.POINTER(Session),
                                 _ctypes.c_char_p,
                                 _ctypes.POINTER(StringHandle) ]
 
+GetServerEnvVarCount = _hapi.HAPI_GetServerEnvVarCount
+GetServerEnvVarCount.restype = Result
+GetServerEnvVarCount.argtypes = [ _ctypes.POINTER(Session),
+                               _ctypes.POINTER(_ctypes.c_int) ]
+
+GetServerEnvVarList = _hapi.HAPI_GetServerEnvVarList
+GetServerEnvVarList.restype = Result
+GetServerEnvVarList.argtypes = [ _ctypes.POINTER(Session),
+                                 _ctypes.POINTER(StringHandle),
+                                 _ctypes.c_int,
+                                 _ctypes.c_int ]
+
 SetServerEnvInt = _hapi.HAPI_SetServerEnvInt
 SetServerEnvInt.restype = Result
 SetServerEnvInt.argtypes = [ _ctypes.POINTER(Session),
@@ -213,6 +225,30 @@ GetString.argtypes = [ _ctypes.POINTER(Session),
                        StringHandle,
                        _ctypes.c_char_p,
                        _ctypes.c_int ]
+
+SetCustomString = _hapi.HAPI_SetCustomString
+SetCustomString.restype = Result
+SetCustomString.argtypes = [ _ctypes.POINTER(Session),
+                             _ctypes.c_char_p,
+                             _ctypes.POINTER(StringHandle) ]
+
+RemoveCustomString = _hapi.HAPI_RemoveCustomString
+RemoveCustomString.restype = Result
+RemoveCustomString.argtypes = [ _ctypes.POINTER(Session),
+                                _ctypes.POINTER(StringHandle) ]
+
+GetStringBatchSize = _hapi.HAPI_GetStringBatchSize
+GetStringBatchSize.restype = Result
+GetStringBatchSize.argtypes = [ _ctypes.POINTER(Session),
+                                _ctypes.POINTER(StringHandle),
+                                _ctypes.c_int,
+                                _ctypes.POINTER(_ctypes.c_int) ]
+
+GetStringBatch = _hapi.HAPI_GetStringBatch
+GetStringBatch.restype = Result
+GetStringBatch.argtypes = [ _ctypes.POINTER(Session),
+                            _ctypes.c_char_p,
+                            _ctypes.c_int ]
 
 
 GetTime = _hapi.HAPI_GetTime
@@ -343,6 +379,31 @@ CreateInputNode.argtypes = [ _ctypes.POINTER(Session),
                              _ctypes.POINTER(NodeId),
                              _ctypes.c_char_p ]
 
+CreateHeightfieldInputNode = _hapi.HAPI_CreateHeightfieldInputNode
+CreateHeightfieldInputNode.restype = Result
+CreateHeightfieldInputNode.argtypes = [ _ctypes.POINTER(Session),
+                                        NodeId,
+                                        _ctypes.c_char_p,
+                                        _ctypes.c_int,
+                                        _ctypes.c_int,
+                                        _ctypes.c_float,
+                                        _ctypes.POINTER(NodeId),
+                                        _ctypes.POINTER(NodeId),
+                                        _ctypes.POINTER(NodeId),
+                                        _ctypes.POINTER(NodeId),
+                                        ]
+
+CreateHeightfieldInputVolumeNode = _hapi.HAPI_CreateHeightfieldInputVolumeNode
+CreateHeightfieldInputVolumeNode.restype = Result
+CreateHeightfieldInputVolumeNode.argtypes = [ _ctypes.POINTER(Session),
+                                              NodeId,
+                                              _ctypes.POINTER(NodeId),
+                                              _ctypes.c_char_p,
+                                              _ctypes.c_int,
+                                              _ctypes.c_int,
+                                              _ctypes.c_float,
+                                        ]
+
 CookNode = _hapi.HAPI_CookNode
 CookNode.restype = Result
 CookNode.argtypes = [ _ctypes.POINTER(Session),
@@ -365,7 +426,9 @@ ConnectNodeInput.restype = Result
 ConnectNodeInput.argtypes = [ _ctypes.POINTER(Session),
                               NodeId,
                               _ctypes.c_int,
-                              NodeId ]
+                              NodeId,
+                              _ctypes.c_int,
+                            ]
 
 DisconnectNodeInput = _hapi.HAPI_DisconnectNodeInput
 DisconnectNodeInput.restype = Result
@@ -386,6 +449,39 @@ GetNodeInputName.argtypes = [ _ctypes.POINTER(Session),
                               NodeId,
                               _ctypes.c_int,
                               _ctypes.POINTER(StringHandle) ]
+
+DisconnectNodeOutputsAt = _hapi.HAPI_DisconnectNodeOutputsAt
+DisconnectNodeOutputsAt.restype = Result
+DisconnectNodeOutputsAt.argtypes = [ _ctypes.POINTER(Session),
+                                     NodeId,
+                                     _ctypes.c_int ]
+
+QueryNodeOutputConnectedCount = _hapi.HAPI_QueryNodeOutputConnectedCount
+QueryNodeOutputConnectedCount.restype = Result
+QueryNodeOutputConnectedCount.argtypes = [ _ctypes.POINTER(Session),
+                                           NodeId,
+                                           _ctypes.c_int,
+                                           Bool,
+                                           Bool,
+                                           _ctypes.POINTER(_ctypes.c_int) ]
+
+QueryNodeOutputConnectedNodes = _hapi.HAPI_QueryNodeOutputConnectedNodes
+QueryNodeOutputConnectedNodes.restype = Result
+QueryNodeOutputConnectedNodes.argtypes = [ _ctypes.POINTER(Session),
+                                           NodeId,
+                                           _ctypes.c_int,
+                                           Bool,
+                                           Bool,
+                                           _ctypes.POINTER(NodeId),
+                                           _ctypes.c_int,
+                                           _ctypes.c_int, ]
+
+GetNodeOutputName = _hapi.HAPI_GetNodeOutputName
+GetNodeOutputName.restype = Result
+GetNodeOutputName.argtypes = [ _ctypes.POINTER(Session),
+                               NodeId,
+                               _ctypes.c_int,
+                               _ctypes.POINTER(StringHandle) ]
 
 GetParameters = _hapi.HAPI_GetParameters
 GetParameters.restype = Result
@@ -722,6 +818,16 @@ GetInstanceTransforms.argtypes = [ _ctypes.POINTER(Session),
                                    _ctypes.c_int,
                                    _ctypes.c_int ]
 
+GetInstanceTransformsOnPart = _hapi.HAPI_GetInstanceTransformsOnPart
+GetInstanceTransformsOnPart.restype = Result
+GetInstanceTransformsOnPart.argtypes = [ _ctypes.POINTER(Session),
+                                         NodeId,
+                                         PartId,
+                                         RSTOrder,
+                                         _ctypes.POINTER(Transform),
+                                         _ctypes.c_int,
+                                         _ctypes.c_int ]
+
 SetObjectTransform = _hapi.HAPI_SetObjectTransform
 SetObjectTransform.restype = Result
 SetObjectTransform.argtypes = [ _ctypes.POINTER(Session),
@@ -945,6 +1051,14 @@ AddAttribute.argtypes = [ _ctypes.POINTER(Session),
                           _ctypes.c_char_p,
                           _ctypes.POINTER(AttributeInfo)]
 
+DeleteAttribute = _hapi.HAPI_DeleteAttribute
+DeleteAttribute.restype = Result
+DeleteAttribute.argtypes = [ _ctypes.POINTER(Session),
+                             NodeId,
+                             PartId,
+                             _ctypes.c_char_p,
+                             _ctypes.POINTER(AttributeInfo)]
+
 SetAttributeIntData = _hapi.HAPI_SetAttributeIntData
 SetAttributeIntData.restype = Result
 SetAttributeIntData.argtypes = [ _ctypes.POINTER(Session),
@@ -1007,6 +1121,14 @@ AddGroup.argtypes = [ _ctypes.POINTER(Session),
                       PartId,
                       GroupType,
                       _ctypes.c_char_p ]
+
+DeleteGroup = _hapi.HAPI_DeleteGroup
+DeleteGroup.restype = Result
+DeleteGroup.argtypes = [ _ctypes.POINTER(Session),
+                         NodeId,
+                         PartId,
+                         GroupType,
+                         _ctypes.c_char_p ]
 
 SetGroupMembership = _hapi.HAPI_SetGroupMembership
 SetGroupMembership.restype = Result
@@ -1424,3 +1546,147 @@ LoadGeoFromMemory.argtypes = [ _ctypes.POINTER(Session),
                                _ctypes.c_char_p,
                                _ctypes.c_char_p,
                                _ctypes.c_int ]
+
+GetPDGGraphContexts = _hapi.HAPI_GetPDGGraphContexts
+GetPDGGraphContexts.restype = Result
+GetPDGGraphContexts.argtypes = [ _ctypes.POINTER(Session),
+                                 _ctypes.POINTER(_ctypes.c_int),
+                                 _ctypes.POINTER(StringHandle),
+                                 _ctypes.POINTER(PDG_GraphContextId),
+                                 _ctypes.c_int ]
+
+CookPDG = _hapi.HAPI_CookPDG
+CookPDG.restype = Result
+CookPDG.argtypes = [ _ctypes.POINTER(Session),
+                     NodeId,
+                     _ctypes.c_int,
+                     _ctypes.c_int ]
+
+GetPDGEvents = _hapi.HAPI_GetPDGEvents
+GetPDGEvents.restype = Result
+GetPDGEvents.argtypes = [ _ctypes.POINTER(Session),
+                          _ctypes.POINTER(PDG_GraphContextId),
+                          _ctypes.POINTER(PDG_EventInfo),
+                          _ctypes.c_int,
+                          _ctypes.POINTER(_ctypes.c_int),
+                          _ctypes.POINTER(_ctypes.c_int) ]
+
+GetPDGState = _hapi.HAPI_GetPDGState
+GetPDGState.restype = Result
+GetPDGState.argtypes = [ _ctypes.POINTER(Session),
+                         PDG_GraphContextId,
+                         _ctypes.POINTER(_ctypes.c_int) ]
+
+CreateWorkitem = _hapi.HAPI_CreateWorkitem
+CreateWorkitem.restype = Result
+CreateWorkitem.argtypes = [ _ctypes.POINTER(Session),
+                            NodeId,
+                            _ctypes.POINTER(PDG_WorkitemId),
+                            _ctypes.c_char_p,
+                            _ctypes.c_int ]
+
+GetWorkitemInfo = _hapi.HAPI_GetWorkitemInfo
+GetWorkitemInfo.restype = Result
+GetWorkitemInfo.argtypes = [ _ctypes.POINTER(Session),
+                             PDG_GraphContextId,
+                             PDG_WorkitemId,
+                             _ctypes.POINTER(PDG_EventInfo) ]
+
+SetWorkitemIntData = _hapi.HAPI_SetWorkitemIntData
+SetWorkitemIntData.restype = Result
+SetWorkitemIntData.argtypes = [ _ctypes.POINTER(Session),
+                                NodeId,
+                                PDG_WorkitemId,
+                                _ctypes.c_char_p,
+                                _ctypes.POINTER(_ctypes.c_int),
+                                _ctypes.c_int ]
+
+SetWorkitemFloatData = _hapi.HAPI_SetWorkitemFloatData
+SetWorkitemFloatData.restype = Result
+SetWorkitemFloatData.argtypes = [ _ctypes.POINTER(Session),
+                                NodeId,
+                                PDG_WorkitemId,
+                                _ctypes.c_char_p,
+                                _ctypes.POINTER(_ctypes.c_float),
+                                _ctypes.c_int ]
+
+SetWorkitemStringData = _hapi.HAPI_SetWorkitemStringData
+SetWorkitemStringData.restype = Result
+SetWorkitemStringData.argtypes = [ _ctypes.POINTER(Session),
+                                NodeId,
+                                PDG_WorkitemId,
+                                _ctypes.c_char_p,
+                                _ctypes.c_int,
+                                _ctypes.c_char_p ]
+
+GetNumWorkitems = _hapi.HAPI_GetNumWorkitems
+GetNumWorkitems.restype = Result
+GetNumWorkitems.argtypes = [ _ctypes.POINTER(Session),
+                             NodeId,
+                             _ctypes.POINTER(_ctypes.c_int) ]
+
+GetWorkitems = _hapi.HAPI_GetWorkitems
+GetWorkitems.restype = Result
+GetWorkitems.argtypes = [ _ctypes.POINTER(Session),
+                          NodeId,
+                          _ctypes.POINTER(_ctypes.c_int),
+                          _ctypes.c_int ]
+
+GetWorkitemDataLength = _hapi.HAPI_GetWorkitemDataLength
+GetWorkitemDataLength.restype = Result
+GetWorkitemDataLength.argtypes = [ _ctypes.POINTER(Session),
+                                   NodeId,
+                                   PDG_WorkitemId,
+                                   _ctypes.c_char_p,
+                                   _ctypes.POINTER(_ctypes.c_int) ]
+
+GetWorkitemIntData = _hapi.HAPI_GetWorkitemIntData
+GetWorkitemIntData.restype = Result
+GetWorkitemIntData.argtypes = [ _ctypes.POINTER(Session),
+                                NodeId,
+                                PDG_WorkitemId,
+                                _ctypes.c_char_p,
+                                _ctypes.POINTER(_ctypes.c_int),
+                                _ctypes.c_int ]
+
+GetWorkitemFloatData = _hapi.HAPI_GetWorkitemFloatData
+GetWorkitemFloatData.restype = Result
+GetWorkitemFloatData.argtypes = [ _ctypes.POINTER(Session),
+                                  NodeId,
+                                  PDG_WorkitemId,
+                                  _ctypes.c_char_p,
+                                  _ctypes.POINTER(_ctypes.c_float),
+                                  _ctypes.c_int ]
+
+GetWorkitemStringData = _hapi.HAPI_GetWorkitemStringData
+GetWorkitemStringData.restype = Result
+GetWorkitemStringData.argtypes = [ _ctypes.POINTER(Session),
+                                   NodeId,
+                                   PDG_WorkitemId,
+                                   _ctypes.c_char_p,
+                                   _ctypes.POINTER(StringHandle),
+                                   _ctypes.c_int ]
+
+GetWorkitemResultInfo = _hapi.HAPI_GetWorkitemResultInfo
+GetWorkitemResultInfo.restype = Result
+GetWorkitemResultInfo.argtypes = [ _ctypes.POINTER(Session),
+                                   NodeId,
+                                   PDG_WorkitemId,
+                                   _ctypes.POINTER(PDG_WorkitemResultInfo),
+                                   _ctypes.c_int ]
+
+DirtyPDGNode = _hapi.HAPI_DirtyPDGNode
+DirtyPDGNode.restype = Result
+DirtyPDGNode.argtypes = [ _ctypes.POINTER(Session),
+                          NodeId,
+                          _ctypes.c_int ]
+
+PausePDGCook = _hapi.HAPI_PausePDGCook
+PausePDGCook.restype = Result
+PausePDGCook.argtypes = [ _ctypes.POINTER(Session),
+                          PDG_GraphContextId ]
+
+CancelPDGCook = _hapi.HAPI_CancelPDGCook
+CancelPDGCook.restype = Result
+CancelPDGCook.argtypes = [ _ctypes.POINTER(Session),
+                          PDG_GraphContextId ]
